@@ -207,18 +207,11 @@ c) Describa con sus palabras los pasos y decisiones que tomó para agregarle pri
 
 ### Ejercicio 12: Realice en EBNF la gramática para la definición un tag div en html 5. (Puede ayudarse con el siguiente enlace (https://developer.mozilla.org/es/docs/Web/HTML/Elemento/div)
 
-<div class="warning">
-  <img
-    src="/shared-assets/images/examples/leopard.jpg"
-    alt="An intimidating leopard." />
-  <p>Beware of the manchi</p>
-</div>
-
-G = (N, T, S, P)
-N = {`<div><palabra><source><letra>`}
-T = {`ASCII, ".jpg", "<div class=""", """<img src=""", """alt=""", """<p>""","""</p></div>""`}
-S = `<div>`
-P = {`
+- G = (N, T, S, P)
+- N = {`<div><palabra><source><letra>`}
+- T = {`ASCII, ".jpg", "<div class=""", """<img src=""", """alt=""", """<p>""","""</p></div>""`}
+- S = `<div>`
+- P = {`
 	<div> ::= "<div class=""<palabra>>""<img src=""<source>""alt=""<palabra>""<p>""<palabra>""</p></div>"
 	<palabra> ::= {<letra>}+
 	<source> ::= <palabra>".jpg"
@@ -231,11 +224,11 @@ P = {`
 
 JAVA
 
-G = (N, T, S, P)
-N = {`<metodo><firma><bloque><parametros><palabra><letra><tipo_retorno>`}
-T = {"a", ..., "z", "A", ..., "Z", "void", "int", "double", "String", ..., "Object"}
-S = `<metodo>`
-P = {`
+- G = (N, T, S, P)
+- N = {`<metodo><firma><bloque><parametros><palabra><letra><tipo_retorno>`}
+- T = {"a", ..., "z", "A", ..., "Z", "void", "int", "double", "String", ..., "Object"}
+- S = `<metodo>`
+- P = {`
 	<metodo> ::= <firma>[<bloque>]
 	<firma> ::= <scope>["static"]<tipo_retorno><palabra>"("[{<parametros>}*]")"
 	<parametros> ::= {<tipo><palabra>}*
@@ -248,11 +241,11 @@ P = {`
 
 Python
 
-G = (N, T, S, P)
-N = {`<funcion><firma><bloque><palabra><letra>`}
-T = {"a", ..., "z", "A", ..., "Z"}
-S = `<funcion>`
-P = {`
+- G = (N, T, S, P)
+- N = {`<funcion><firma><bloque><palabra><letra>`}
+- T = {"a", ..., "z", "A", ..., "Z"}
+- S = `<funcion>`
+- P = {`
 	<funcion> ::= <firma><bloque>
 	<firma> ::= "def("[{<parametros>}*]")"
 	<bloque> ::= [{<palabra>}*]
