@@ -42,13 +42,14 @@ Por ejemplo en java: public, int, double, static, true, false, etc.
 
 ### Ejercicio 5: Dada la siguiente grámatica escrita en BNF:
 
-G = (N, T, S, P)
-N = `{<numero_entero>, <digito>}`
-T = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
-S = `<numero_entero>`
-P = {`
-	<numero_entero> ::= <digito><numero_entero> | <numero_entero><digito> | <digito>
-<digito> ::= 0|...|9`
+- G = (N, T, S, P)
+- N = `{<numero_entero>, <digito>}`
+- T = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+- S = `<numero_entero>`
+- P = {
+    - `<numero_entero> ::= <digito><numero_entero> | <numero_entero><digito> | <digito>`
+    - `<digito> ::= 0|...|9`
+
 }
 
 a- Identifique las componentes de la misma
@@ -65,53 +66,57 @@ Es ambigua por `<digito><numero_entero> | <numero_entero><digito>`
 La asociativa es por la izquierda o por la derecha, en este caso se estarían generando dos arboles de derivación.
 
 ***Corrección***
-G = {N, T, S, P}
-N = {`<digito><numero_entero>`}
-T = {0,1,2,3,4,5,6,7,8,9}
-S = `<numero_entero>`
-P = {
-	`<numero_entero> ::= <digito> |<digito><numero_entero>`
-	`<digito> ::= 0|...|9`
-	}
+- G = {N, T, S, P}
+- N = {`<digito><numero_entero>`}
+- T = {0,1,2,3,4,5,6,7,8,9}
+- S = `<numero_entero>`
+- P = {
+	- `<numero_entero> ::= <digito> |<digito><numero_entero>`
+	- `<digito> ::= 0|...|9`
+   
+}
 
 ### Ejercicio 6: Defina en BNF (Gramática de contexto libre desarrollada por Backus- Naur) la gramática para la definición de una palabra cualquiera.
 
-G = (N, T, S, P)
-N = `{<palabra><letraMin><letraMay>`}
-T = {a,..., z, A,..., Z}
-S = `<palabra>`
-P = {`
-	<palabra> ::= <letraMin> | <letraMay> | <letraMay><palabra> | <letraMin><palabra>
-	<letraMin> ::= a | ... | z
-	<letraMay> ::= A | ... | Z
-`}
+- G = (N, T, S, P)
+- N = `{<palabra><letraMin><letraMay>`}
+- T = {a,..., z, A,..., Z}
+- S = `<palabra>`
+- P = {
+	- `<palabra> ::= <letraMin> | <letraMay> | <letraMay><palabra> | <letraMin><palabra>`
+	- `<letraMin> ::= a | ... | z`
+	- `<letraMay> ::= A | ... | Z`
+
+}
 
 ### Ejercicio 7: Defina en EBNF la gramática para la definición de números reales. Inténtelo desarrollar para BNF y explique las diferencias con la utilización de la gramática EBNF.
 
 EBNF:
 
-G = (N, T, S, P)
-N = {`<real><digito>`}
-T = {0,1,2,3,4,5,6,7,8,9,**,**}
-S = `<real>`
-P = {`
-	<real> ::= [-]{<digito>}+[,{<digito>}+]
-`}
+- G = (N, T, S, P)
+- N = {`<real><digito>`}
+- T = {0,1,2,3,4,5,6,7,8,9,**,**}
+- S = `<real>`
+- P = {
+	- `<real> ::= [-]{<digito>}+[,{<digito>}+]`
+
+}
 
 BNF: ***CONSULTAR***
 
-G = (N, T, S, P)
-N = {`<real><digito><signo><decimal><entero>`}
-T = {0,1,2,3,4,5,6,7,8,9,+,-,**,**}
-S = `<real>`
-P = {`
-	<real> ::= <digito> |<signo><digito> | <signo><digito><real> | <digito><real> |  <digito><decimal> | <signo><digito><decimal> 
-	<decimal> ::= ,<entero>
-	<entero> ::= <digito> | <digito><entero>
-	<digito> ::= 0 | ... | 9
-	<signo> ::= + | -
-	<coma> ::= ,
-`}
+- G = (N, T, S, P)
+- N = {`<real><digito><signo><decimal><entero>`}
+- T = {0,1,2,3,4,5,6,7,8,9,+,-,**,**}
+- S = `<real>`
+- P = {
+	- `<real> ::= <digito> |<signo><digito> | <signo><digito><real> | <digito><real> |  <digito><decimal> | <signo><digito><decimal>`
+	- `<decimal> ::= ,<entero>`
+	- `<entero> ::= <digito> | <digito><entero>`
+	- `<digito> ::= 0 | ... | 9`
+	- `<signo> ::= + | -`
+	- `<coma> ::= ,`
+
+}
 
 La diferencia radica en la complejidad de formar expresiones complejas, EBNF provee metasimbolos que simplifican la tarea de definir la gramatica. Por ejemplo con la repetición y opcionales.
 
@@ -186,18 +191,19 @@ a) Defina con EBNF la gramática para una expresión numérica, dónde intervien
 números. Considerar los operadores +, -, * y / sin orden de prioridad. No considerar el uso de
 paréntesis.
 
-G = (N, T, S, P)
-N = {`<exp><numero><op><digito>`}
-T = {0,...9,"+", "-", "*", "/"}
-S = `<exp>`
-P = {`
-	<exp> ::= (<var>|<numero>){<op>(<var>|<numero>)}+
-	<numero> ::= [(+|-)]{<digito>}+	
-	<var> ::= <letra>{(<letra>|<digito>)}+
-	<digito> ::= 0 | ... | 9
-	<letra> ::= "a" | ... | "z" | "A" | ... | "Z" 
-	<op> ::= "+" | "-" | "*" | "/"
-`}
+- G = (N, T, S, P)
+- N = {`<exp><numero><op><digito>`}
+- T = {0,...9,"+", "-", "*", "/"}
+- S = `<exp>`
+- P = {
+	- `<exp> ::= (<var>|<numero>){<op>(<var>|<numero>)}+`
+	- `<numero> ::= [(+|-)]{<digito>}+`
+	- `<var> ::= <letra>{(<letra>|<digito>)}+`
+	- `<digito> ::= 0 | ... | 9`
+	- `<letra> ::= "a" | ... | "z" | "A" | ... | "Z"` 
+	- `<op> ::= "+" | "-" | "*" | "/"`
+
+}
 
 
 b) A la gramática definida en el ejercicio anterior agregarle prioridad de operadores.
@@ -211,12 +217,13 @@ c) Describa con sus palabras los pasos y decisiones que tomó para agregarle pri
 - N = {`<div><palabra><source><letra>`}
 - T = {`ASCII, ".jpg", "<div class=""", """<img src=""", """alt=""", """<p>""","""</p></div>""`}
 - S = `<div>`
-- P = {`
-	<div> ::= "<div class=""<palabra>>""<img src=""<source>""alt=""<palabra>""<p>""<palabra>""</p></div>"
-	<palabra> ::= {<letra>}+
-	<source> ::= <palabra>".jpg"
-	<letra> ::= ASCII (no se como poner todos)
-`}
+- P = {
+	- `<div> ::= "<div class=""<palabra>>""<img src=""<source>""alt=""<palabra>""<p>""<palabra>""</p></div>"`
+	- `<palabra> ::= {<letra>}+`
+	- `<source> ::= <palabra>".jpg"`
+	- `<letra> ::= ASCII (no se como poner todos)`
+
+}
 
 ### Ejercicio 13: Defina en EBNF una gramática para la construcción de números primos.¿Qué debería agregar a la gramática para completar el ejercicio?
 
@@ -228,15 +235,16 @@ JAVA
 - N = {`<metodo><firma><bloque><parametros><palabra><letra><tipo_retorno>`}
 - T = {"a", ..., "z", "A", ..., "Z", "void", "int", "double", "String", ..., "Object"}
 - S = `<metodo>`
-- P = {`
-	<metodo> ::= <firma>[<bloque>]
-	<firma> ::= <scope>["static"]<tipo_retorno><palabra>"("[{<parametros>}*]")"
-	<parametros> ::= {<tipo><palabra>}*
-	<bloque> ::= [{<palabra>}*]["return"<tipo_retorno>]
-	<palabra> ::= {letra}*
-	<letra> ::= a | ... | z | A | ... | Z
-	<tipo_retorno> ::= "void" | int | double | String | ... | Object 
-`}
+- P = {
+	- `<metodo> ::= <firma>[<bloque>]`
+	- `<firma> ::= <scope>["static"]<tipo_retorno><palabra>"("[{<parametros>}*]")"`
+	- `<parametros> ::= {<tipo><palabra>}*`
+	- `<bloque> ::= [{<palabra>}*]["return"<tipo_retorno>]`
+	- `<palabra> ::= {letra}*`
+	- `<letra> ::= a | ... | z | A | ... | Z`
+	- `<tipo_retorno> ::= "void" | int | double | String | ... | Object `
+
+}
 
 
 Python
@@ -245,10 +253,11 @@ Python
 - N = {`<funcion><firma><bloque><palabra><letra>`}
 - T = {"a", ..., "z", "A", ..., "Z"}
 - S = `<funcion>`
-- P = {`
-	<funcion> ::= <firma><bloque>
-	<firma> ::= "def("[{<parametros>}*]")"
-	<bloque> ::= [{<palabra>}*]
-	<palabra> ::= {<letra>}*
-	<letra> ::= a | ... | z | A | ... | Z
-`}
+- P = {
+	- `<funcion> ::= <firma><bloque>`
+	- `<firma> ::= "def("[{<parametros>}*]")"`
+	- `<bloque> ::= [{<palabra>}*]`
+	- `<palabra> ::= {<letra>}*`
+	- `<letra> ::= a | ... | z | A | ... | Z`
+
+}
