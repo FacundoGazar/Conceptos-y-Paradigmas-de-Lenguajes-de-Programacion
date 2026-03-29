@@ -238,7 +238,7 @@ JAVA
 - P = {
 	- `<metodo> ::= <firma>[<bloque>]`
 	- `<firma> ::= <scope>["static"]<tipo_retorno><palabra>"("[{<parametros>}*]")"`
-	- `<parametros> ::= {<tipo><palabra>}*`
+	- `<parametros> ::= {<tipo_retorno><palabra>}*`
 	- `<bloque> ::= [{<palabra>}*]["return"<tipo_retorno>]`
 	- `<palabra> ::= {letra}*`
 	- `<letra> ::= a | ... | z | A | ... | Z`
