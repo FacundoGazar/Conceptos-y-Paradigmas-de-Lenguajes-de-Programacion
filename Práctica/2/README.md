@@ -10,7 +10,7 @@
 | terminal|palabra terminal | ovalo|Definición de un elemento terminal|
 |`< >` |`< >` | Rectangulo |Definición de un elemento no terminal|
 |::=|::=| diagrama con rectángulos, óvalos y flechas|Meta-símbolo de definición que indica que el elemento a su izquierda se puede definir según el esquema de la derecha
-|`|`|`(|)`|flecha que se divide en dos o más caminos| Selección de una alternativa
+|`I`|`(I)`|flecha que se divide en dos o más caminos| Selección de una alternativa
 |`<p><p1>`|{}||Repetición
 ||*|*el que se ve en la explicacion practica*|Repetición de 0 o más veces
 ||+|*el que se ve en la explicacion practica*|Repetición de 1 o más veces
@@ -233,13 +233,13 @@ JAVA
 
 - G = (N, T, S, P)
 - N = {`<metodo><firma><bloque><parametros><palabra><letra><tipo_retorno>`}
-- T = {"a", ..., "z", "A", ..., "Z", "void", "int", "double", "String", ..., "Object"}
+- T = {"a", ..., "z", "A", ..., "Z", "void", "int", "double", "String", ..., "Object", "{", "}"}
 - S = `<metodo>`
 - P = {
 	- `<metodo> ::= <firma>[<bloque>]`
 	- `<firma> ::= <scope>["static"]<tipo_retorno><palabra>"("[{<parametros>}*]")"`
 	- `<parametros> ::= {<tipo_retorno><palabra>}*`
-	- `<bloque> ::= [{<palabra>}*]["return"<tipo_retorno>]`
+	- `<bloque> ::= "{"[{<palabra>}*]["return"<tipo_retorno>]"}"`
 	- `<palabra> ::= {letra}*`
 	- `<letra> ::= a | ... | z | A | ... | Z`
 	- `<tipo_retorno> ::= "void" | int | double | String | ... | Object `
@@ -251,11 +251,11 @@ Python
 
 - G = (N, T, S, P)
 - N = {`<funcion><firma><bloque><palabra><letra>`}
-- T = {"a", ..., "z", "A", ..., "Z"}
+- T = {"a", ..., "z", "A", ..., "Z", ":"}
 - S = `<funcion>`
 - P = {
 	- `<funcion> ::= <firma><bloque>`
-	- `<firma> ::= "def("[{<parametros>}*]")"`
+	- `<firma> ::= "def("[{<parametros>}*]"):"`
 	- `<bloque> ::= [{<palabra>}*]`
 	- `<palabra> ::= {<letra>}*`
 	- `<letra> ::= a | ... | z | A | ... | Z`
