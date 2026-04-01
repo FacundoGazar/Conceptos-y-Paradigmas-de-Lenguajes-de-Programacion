@@ -1,3 +1,4 @@
+
 # Práctica 3
 
 ## Semántica
@@ -83,6 +84,144 @@ No, no es lo mismo. El intérprete y el compilador se puede comparar de diferent
 		nombre = 10 + 5;
 
 - Si bien sintácticamente el programa es correcto, este produce un error semántico porque intentamos asignar a nombre como el resultado de una suma, operación la cual no está asociada a las variables de tipo String.
+
+### Ejercicio 5: Sean los siguientes ejemplos de programas. Analice y diga qué tipo de error se produce (Semántico o Sintáctico) y en qué momento se detectan dichos errores (Compilación o Ejecución). Aclaración: Los valores de la ayuda pueden ser mayores.
+
+a) Pascal:
+
+	Program P
+	var 5: integer;
+	var a:char;
+	Begin
+		for i:=5 to 10 do begin
+			write(a);
+			a=a+1;
+		end;
+	End.
+
+- Errores sintácticos:
+	- Falta el ";" luego de Program P. Se detecta en la compilación. La gramática de Pascal exige Program P;. El compilador detecta la ausencia del punto y coma al parsear el encabezado.
+	- Identificador inválido en var 5: integer. Se detecta en la compilación. Un nombre de variable no puede comenzar con un dígito.
+	- Operador de asignacion incorrecto en a = a+1. Se detecta en la compilación. En Pascal la asignación es ":=".
+
+- Errores semánticos:
+	- variable i no declarada en for i:= 5 to 10 - i. Se detecta en la compilación. El compilador lo detecta durante el análisis de la tabla de símbolos. No se puede usar un identificador sin declarar.
+	- a no inicializada en write(a). Se detecta en ejecución. a está declarada como char pero nunca es inicializada. Pascal no garantiza un valor por defecto; el comportamiento es indefinido y el problema se manifiesta al ejecutar.
+
+b) Java:
+
+	public String tabla(int numero, arrayList<Boolean> listado)
+	{
+		String result = null;
+		for(i = 1; i < 11; i--) {
+			result += numero + "x" + i + "=" + (i*numero) + "\n";
+			listado.get(listado.size()-1)=(BOOLEAN) numero>i;
+		}
+		return true;
+	}
+
+- Errores sintácticos:
+	- BOOLEAN no existe, deberia ser boolean o Boolean.
+	- listado.get(listado.size()-1)=(BOOLEAN) numero>i; deberia ser una variable.
+	
+- Errores semánticos:
+	- La variable i en el for no está declarada. Se detecta en compilación. Ademas se genera un bucle infinito que se detecta en ejecución. **consultar**
+	- El return true es un tipo incompatible con String. Se detecta en compilación. El método declara retornar un String pero devuelve un boolean. El compilador detecta la incompatibilidad de tipos. Se detecta en compilación.
+	- result += ... — result es null. Se detecta en ejecución.
+
+**consultar que seria el error de arrayListBoolean — nombre incorrecto**
+
+c) C
+
+	# include <stdio.h>
+	int suma; /* Esta es una variable global */
+	int main()
+	{ int indice;
+		encabezado;
+		for (indice = 1 ; indice <= 7 ; indice ++)
+		cuadrado (indice);
+		final(); Llama a la función final */
+		return 0;
+	}
+	cuadrado (numero)
+	int numero;
+	{ int numero_cuadrado;
+		numero_cuadrado == numero * numero;
+		suma += numero_cuadrado;
+		printf("El cuadrado de %d es %d\n",
+		numero, numero_cuadrado);
+	}
+
+- Errores sintácticos:
+	- final(); Llama a la función final */ — comentario sin apertura. Se detecta en compilación. Falta el de apertura. El compilador ve texto libre fuera de una cadena y falla al parsear.
+
+- Errores semánticos:
+	- encabezado; — llamada sin paréntesis ni declaración previa. Se detecta en la compilación.
+	- cuadrado(numero) — sin tipo de retorno. Se detecta en compilación.
+	- int numero; — estilo K&R de declaración de parámetros. Se detecta en compilación.
+	- numero_cuadrado == numero * numero. Se detecta en ejecución. Se usa == (comparacion) en lugar de = (asignacion). Sintácticamente es válido en C (es una expresión); el compilador puede emitir una advertencia pero compila. El resultado: numero_cuadrado queda sin inicializar y printf imprime basura en tiempo de ejecución.
+	- suma += numero_cuadrado — variable acumulada sin inicializar. Se detecta en ejecución. suma es global y se inicializa a 0 por el estándar C, pero numero_cuadrado nunca recibe valor (por el error anterior). El acumulado resulta en un valor indefinido.
+
+d) Python:
+
+	#!/usr/bin/python
+	print "\nDEFINICION DE NUMEROS PRIMOS"
+	r = 1
+	while r = True:
+		N = input("\nDame el numero a analizar: ")
+		i = 3
+		fact = 0
+		if (N mod 2 == 0) and (N != 2):
+			print "\nEl numero %d NO es primo\n" % N
+		else:
+			while i <= (N^0.5):
+				if (N % i) == 0:
+					mensaje="\nEl numero ingresado NO es primo\n" % N
+					msg = mensaje[4:6]
+					print msg
+					fact = 1
+				i+=2
+			if fact == 0:
+				print "\nEl numero %d SI es primo\n" % N
+	r = input("Consultar otro número? SI (1) o NO (0)--->> ")
+
+- Erres sintácticos:
+	- print "\nDEFINICION..." — sintaxis Python 2. Se detecta en compilación. En Python 3, print es una función: se requiere print(...). El intérprete detecta esto en la fase de parsing, antes de ejecutar.
+	- while r = True: — asignación en condición. Se detecta en compilación. Python no permite = dentro de una expresión condicional. El parser lo rechaza de inmediato. La forma correcta sería while r == True: o while r:.
+	- if (N mod 2 == 0) — operador inexistente. Se detecta en compilación. 
+
+- Errores semánticos:
+	- while i <= (N^0.5) — operador XOR en lugar de potencia. Se detecta en ejecución. La potencia en python no se hace con ese simbolo.
+	- if (N mod 2 == 0) and (N != 2). Hay que parsear a n a int con (int). Se detecta en compilacion.
+
+e) Ruby:
+
+	def ej1
+		Puts 'Hola, ¿Cuál es tu nombre?'
+		nom = gets.chomp
+		puts 'Mi nombre es ', + nom
+		puts 'Mi sobrenombre es 'Juan''
+		puts 'Tengo 10 años'
+		meses = edad*12
+		dias = 'meses' *30
+		hs= 'dias * 24'
+		puts 'Eso es: meses + ' meses o ' + dias + ' días o ' + hs + ' horas'
+		puts 'vos cuántos años tenés'
+		edad2 = gets.chomp
+		edad = edad + edad2.to_i
+		puts 'entre ambos tenemos ' + edad + ' años'
+		puts '¿Sabes que hay ' + name.length.to_s + ' caracteres en tu nombre, ' + name + '?'
+	end
+
+- Errores sintácticos:
+	- Puts 'Hola, ¿Cuál es tu nombre?' puts va con mayuscula
+	- puts 'Mi sobrenombre es 'Juan'' se cierra el ‘’ y se sigue escribiendo, falta un “
+
+- Errores semánticos:
+	- meses = edad*12 nunca se declaró la edad. Se detecta en compilación.
+	- puts 'Eso es: meses + ' meses o ' + dias + ' días o ' + hs + ' horas' no existen las variables meses o y días o . Se detecta en compilación.
+	- edad = edad + edad2.to_i edad no está declarada. Se detecta en compilación.
+	- puts '¿Sabes que hay ' + name.length.to_s + ' caracteres en tu nombre, ' + name + '?' name no esta definido. Se detecta en compilación.
 
 ### Ejercicio 6: Explique cuál es la semántica para las variables predefinidas en lenguaje Ruby self y nil. ¿Qué valor toman; cómo son usadas por el lenguaje?
 - self: es una variable especial que hace referencia al objeto actual. En un contexto de clase, self hace referencia a la clase misma. Esta se puede usar dentro de métodos de clase para hacer referencia a la clase en la que se está definiendo el método. Al iniciar el intérprete, sel tiene el valor main, ya que este es el primer objeto que se crea.
