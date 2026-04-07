@@ -95,26 +95,25 @@ EBNF:
 
 - G = (N, T, S, P)
 - N = {`<real><digito>`}
-- T = {0,1,2,3,4,5,6,7,8,9,**,**}
+- T = {0,1,2,3,4,5,6,7,8,9,","}
 - S = `<real>`
 - P = {
-	- `<real> ::= [-]{<digito>}+[,{<digito>}+]`
+	- `<real> ::= [-]{<digito>}+[","{<digito>}+]`
 
 }
 
-BNF: ***CONSULTAR***
+BNF: 
 
 - G = (N, T, S, P)
 - N = {`<real><digito><signo><decimal><entero>`}
-- T = {0,1,2,3,4,5,6,7,8,9,+,-,**,**}
+- T = {0,1,2,3,4,5,6,7,8,9,"+","-",","}
 - S = `<real>`
 - P = {
 	- `<real> ::= <digito> |<signo><digito> | <signo><digito><real> | <digito><real> |  <digito><decimal> | <signo><digito><decimal>`
-	- `<decimal> ::= ,<entero>`
+	- `<decimal> ::= ","<entero>`
 	- `<entero> ::= <digito> | <digito><entero>`
 	- `<digito> ::= 0 | ... | 9`
-	- `<signo> ::= + | -`
-	- `<coma> ::= ,`
+	- `<signo> ::= "+" | "-"`
 
 }
 
@@ -193,11 +192,11 @@ paréntesis.
 
 - G = (N, T, S, P)
 - N = {`<exp><numero><op><digito>`}
-- T = {0,...9,"+", "-", "*", "/"}
+- T = {0...9,"a"..."z","A"..."Z","+", "-", "*", "/"}
 - S = `<exp>`
 - P = {
 	- `<exp> ::= (<var>|<numero>){<op>(<var>|<numero>)}+`
-	- `<numero> ::= [(+|-)]{<digito>}+`
+	- `<numero> ::= [("+"|"-")]{<digito>}+`
 	- `<var> ::= <letra>{(<letra>|<digito>)}+`
 	- `<digito> ::= 0 | ... | 9`
 	- `<letra> ::= "a" | ... | "z" | "A" | ... | "Z"` 
@@ -212,16 +211,16 @@ c) Describa con sus palabras los pasos y decisiones que tomó para agregarle pri
 ### Ejercicio 11: La siguiente gramática intenta describir sintácticamente la sentencia for de ADA, indique cuál/cuáles son los errores justificando la respuesta.
 
 ### Ejercicio 12: Realice en EBNF la gramática para la definición un tag div en html 5. (Puede ayudarse con el siguiente enlace (https://developer.mozilla.org/es/docs/Web/HTML/Elemento/div)
-
+***REHACER considerando N tuplas "clave=valor"***
 - G = (N, T, S, P)
 - N = {`<div><palabra><source><letra>`}
-- T = {`ASCII, ".jpg", "<div class=""", """<img src=""", """alt=""", """<p>""","""</p></div>""`}
+- T = {`"a"..."z","A"..."Z", ".jpg", "<div class=""", """<img src=""", """alt=""", """<p>""","""</p></div>""`}
 - S = `<div>`
 - P = {
 	- `<div> ::= "<div class=""<palabra>>""<img src=""<source>""alt=""<palabra>""<p>""<palabra>""</p></div>"`
 	- `<palabra> ::= {<letra>}+`
 	- `<source> ::= <palabra>".jpg"`
-	- `<letra> ::= ASCII (no se como poner todos)`
+	- `<letra> ::= "a" | ... | "z" | "A" | ... | "Z"` 
 
 }
 
