@@ -1,3 +1,4 @@
+
 # Práctica 4
 
 ### Ejercicio 1: a) Tome una de las variables de la línea 3 del siguiente código e indique y defina cuales son sus atributos:
@@ -214,3 +215,113 @@ IV) Conjunto de valores que puede tomar y conjunto de operaciones que se pueden 
 
 ### Ejercicio 12: Sea el siguiente programa en ADA, completar el cuadro siguiente indicando para cada variable de que tipo es en cuanto al momento de ligadura de su l-valor, su r-valor al momento de alocación en memoria y para todos los identificadores cuál es su alcance y cual es su el tiempo de vida. Indicar para cada variable su r-valor al momento de alocación en memoria
 
+	1. with text_io; use text_io;
+	2. Procedure Main is;
+	3. type vector is array(integer range <>);
+	4. a, n, p:integer;
+	5. v1:vector(1..100);
+	6. c1: constant integer:=10;
+	7. Procedure Uno is;
+	8. type puntero is access integer;
+	9. v2:vector(0..n);
+	10. c1, c2: character;
+	11. p,q: puntero;
+		5. begin
+			7.5.1. n:=4;
+			7.5.2. v2(n):= v2(1) + v1(5);
+			7.5.3. p:= new puntero;
+			7.5.4. q:= p;
+			7.5.5. .......
+			7.5.6. free p;
+			7.5.7. ......
+			7.5.8. free q;
+			7.5.9. ......
+		7.6. end;
+	12. begin
+	13. n:=5;
+	14. .....
+	15. Uno;
+	16. a:= n + 2;
+	17. .....
+	18. end
+
+|Ident.|Tipo|R-Valor|Alcance|T.V.|
+|-|-|-|-|-|
+|a (lin. 4)|automática|basura|5-14|1-14|
+|n (lin. 4)|automática|basura|5-14|1-14|
+|p (lin. 4)|automática|basura|5-14|1-14|
+|v1 (lin. 5)|automática|basura|6-14|1-14|
+|c1 (lin. 6)|automática|basura|7-7.3, 8-14|1-14|
+|Uno (lin. 7)|-|-|7.1-14|7-7.6|
+|v2 (lin. 7.2)|semidinámica|basura|7.3-7.6|7-7.6|
+|c1 (lin. 7.3)|automática|basura|7.4-7.6|7-7.6|
+|c2 (lin. 7.3)|automática|basura|7.4-7.6|7-7.6|
+|p (lin. 7.4)|automática|null|7.5-7.6|7-7.6|
+|q (lin. 7.4)|automática|null|7.5-7.6|7-7.6|
+|pˆ (lin. 7.4)|dinámica|basura|7.5-7.6|7.5.3|
+|qˆ (lin. 7.4)|dinámica|basura|7.5-7.6|7.5.4|
+
+
+### Ejercicio 13: El nombre de una variable puede condicionar: 
+- Su tiempo de vida.
+- Su alcance.
+- Su r-valor.
+- Su tipo. 
+Justifique la respuesta
+
+### Ejercicio 14: Sean los siguientes archivos en C, los cuales se compilan juntos
+
+Indicar para cada variable de que tipo es en cuanto al momento de ligadura de su l-valor. Indicar para cada identificador cuál es su alcance y cual es su el tiempo de vida. Indicar para cada variable su r-valor al momento de alocación en memoria
+
+	ARCHIVO1.C
+		1. int v1;
+		2. int *a;
+		3. Int fun2 ()
+			4. { int v1, y;
+			5. for(y=0; y<8; y++)
+			6. { extern int v2;
+			7. ...}
+			8. }
+		9. main()
+			10. {static int var3;
+			11. extern int v2;
+			12. int v1, y;
+			13. for(y=0; y<10; y++)
+			14. { char var1='C';
+			15. a=&v1;}
+			16. }
+	ARCHIVO2.C
+		17. static int aux;
+		18. int v2;
+		19. static int fun2( )
+			20. { extern int v1;
+			21. aux=aux+1;
+			22. …
+			23. }
+		24. int fun3( )
+			25. { int aux;
+			26. aux=aux+1;
+			27. …
+			28. }
+
+|Ident.|Tipo|R-Valor|Alcance|T.V.|
+|-|-|-|-|-|
+|v1 (lin. 1)|automática|0|2-4, 9-12- 21-23|1-28|
+|a (lin. 2)|automática|nil|3-28|1-28|
+|*a (lin. 2)|dinámica|&v1|3-28|16|
+|fun2 (lin. 3)|-|-|4-8|3-8|
+|v1 (lin. 4)|automática|basura|5-8|3-8|
+|y (lin. 4)|automática|basura|5-8|3-8|
+|v2 (lin. 18)|automática|0|7-8, 12-16, 19-28|1-28|
+|main (lin. 9)|-|-|10-16|9-16|
+|var3 (lin. 10)|estática|0|11-16|<1-28>|
+|v1 (lin. 12)|automática|basura|13-16|9-16|
+|y (lin. 12)|automática|basura|13-16|9-16|
+|var1 (lin. 14)|automática|basura|15-16|9-16|
+|aux (lin. 17)|estática|0|18-25|<1-28>|
+|aux (lin. 25)|automática|basura|26-28|24-28|
+|fun2 (lin. 19)|-|-|20-23|19-23|
+|fun3 (lin. 24)|-|-|25-28|24-28|
+
+### Ejercicio 15 
+Para javascript investigue la diferencia semántica para declarar una variable utilizando los modificadores const, var, let y la ausencia de cualquiera de estos. Compárelo con un lenguaje de su preferencia.
