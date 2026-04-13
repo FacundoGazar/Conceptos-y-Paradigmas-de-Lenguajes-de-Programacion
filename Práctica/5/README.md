@@ -525,3 +525,63 @@ begin
 		write (a(z), b(z));
 end.
 ```
+
+**b)**
+
+|*1 Registro de activación Main|
+|-|
+|PR|
+|x= 1|
+|y= 2|
+|z= ~~1..6~~  ~~1~~..6|
+|a(1)= 1|
+|a(2)= ~~2~~ 14|
+|a(3)= 3|
+|a(4)= 4|
+|a(5)= 5|
+|a(6)= 6|
+|b(1)= 3|
+|b(2)= 4|
+|b(3)= 5|
+|b(4)= 6|
+|b(5)= 7|
+|b(6)= 8|
+|Proced. B|
+|Proced. D|
+|Func. C|
+|VR|
+##
+|*2 Registro de activación Proced. B|
+|-|
+|PR|
+|LE *1|
+|LD *1|
+|y= ~~5~~ ~~7~~ 9|
+|x= ~~2~~ ~~9~~ 10|
+|Prodec. C|
+|VR|
+##
+|*3 Registro de activación Proced. C|
+|-|
+|PR|
+|LE *2|
+|LD *2|
+|c= 2|
+|VR|
+##
+|*4 Registro de activación Proced. D|
+|-|
+|PR|
+|LE *1|
+|LD *3|
+|VR|
+
+
+> Imprime: 
+> 109
+> 13
+> 144
+> 35
+> 46
+> 57
+> 68
