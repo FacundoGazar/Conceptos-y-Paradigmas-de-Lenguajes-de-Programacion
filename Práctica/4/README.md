@@ -247,6 +247,7 @@ IV) Conjunto de valores que puede tomar y conjunto de operaciones que se pueden 
 
 |Ident.|Tipo|R-Valor|Alcance|T.V.|
 |-|-|-|-|-|
+|main (lin. 2)|-|-|3-14|2-14|
 |a (lin. 4)|automática|basura|5-14|1-14|
 |n (lin. 4)|automática|basura|5-14|1-14|
 |p (lin. 4)|automática|basura|5-14|1-14|
