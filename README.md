@@ -12,3 +12,7 @@
 * [**Práctica 4**](https://github.com/FacundoGazar/Conceptos-y-Paradigmas-de-Lenguajes-de-Programacion/tree/main/Pr%C3%A1ctica/4)
 * [**Práctica 5**](https://github.com/FacundoGazar/Conceptos-y-Paradigmas-de-Lenguajes-de-Programacion/tree/main/Pr%C3%A1ctica/5)
 * [**Práctica 6**](https://github.com/FacundoGazar/Conceptos-y-Paradigmas-de-Lenguajes-de-Programacion/tree/main/Pr%C3%A1ctica/6)
+* [**Práctica 7**](https://github.com/FacundoGazar/Conceptos-y-Paradigmas-de-Lenguajes-de-Programacion/tree/main/Pr%C3%A1ctica/7)
+* [**Práctica 8**](https://github.com/FacundoGazar/Conceptos-y-Paradigmas-de-Lenguajes-de-Programacion/tree/main/Pr%C3%A1ctica/8)
+* [**Práctica 9**](https://github.com/FacundoGazar/Conceptos-y-Paradigmas-de-Lenguajes-de-Programacion/tree/main/Pr%C3%A1ctica/9)
+* [**Práctica 10**](https://github.com/FacundoGazar/Conceptos-y-Paradigmas-de-Lenguajes-de-Programacion/tree/main/Pr%C3%A1ctica/10)
